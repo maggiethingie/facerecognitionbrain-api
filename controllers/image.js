@@ -5,12 +5,15 @@ const app = new Clarifai.App({
 });
 
 const handleApiCall = (req, res) => {
+	const { input }  = req.body;
+	console.log(input);
 	app.models
-		.predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
+		.predict(Clarifai.FACE_DETECT_MODEL, input)
 		.then(data => {
 			res.json(data);
+			console.log("data", data);
 		})
-	.catch(err => res.status(400).json('unable to work with API'))
+	.catch(err => res.status(400).json("unable to work with API"))
 }
 
 const handleImage = (db) => (req, res) => {
